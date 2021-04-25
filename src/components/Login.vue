@@ -9,12 +9,12 @@
       <button type="submit">Login</button>-->
 
       <div class="form-group">
-        <label for="exampleInputEmail1">ФІО</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ФІО">
+        <label for="exampleInputEmail1">ID</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Id">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Навчальний заклад</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Навчальний заклад">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
       <button v-on:click="Start" type="submit" class="btn btn-dark">Почати олімпіаду</button>
     </form>
