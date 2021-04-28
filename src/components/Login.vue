@@ -11,13 +11,13 @@
 
       <div class="form-group">
         <label for="exampleInputEmail1">ID</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Id">
+        <input type="text" v-model="id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Id">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <input type="text" v-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
-      <button v-on:click="Start" type="submit" class="btn btn-dark">Почати олімпіаду</button>
+      <button @click="auth" type="submit" class="btn btn-dark">Почати олімпіаду</button>
     </form>
   </div>
 </template>
@@ -26,9 +26,42 @@
 
 export default {
   name: 'Login',
+  data(){
+    return{
+      id:"",
+      password:""
+    }
+  },
   methods: {
-    Start: function () {
+    async auth() {
+      const axios = require('axios').default;
+      const headers= {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin' : '*',
+        }
 
+
+      await axios({
+        method: "post",
+        url: "https://olimp-english.herokuapp.com/api/token/",
+        data: {
+          "username": this.id,
+          "password": this.password
+        },
+        headers: headers,
+      })
+          .then(function (response) {
+            console.log(response);
+            console.log(response.data);
+            sessionStorage.setItem("access_token", response.data.access);
+            sessionStorage.setItem("refresh_token", response.data.refresh);
+            // alert(sessionStorage.getItem("access_token"))
+            // router.push('home')
+          })
+          .catch(function (error) {
+            console.log(error);
+            alert("Неверный логин пароль")
+          });
 
     }
   }

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3 align="center">Завдання <span>{{ count }}</span></h3>
+    <div v-html="media"></div>
     <span>{{ task }}</span>
 
     <br><br>
@@ -50,8 +51,13 @@ export default {
   name: "Task",
   data() {
     return {
+      media: ` <iframe width="560" height="315" src="https://www.youtube.com/embed/0cSt9R_lvYI"
+                             title="YouTube video player" frameborder="0"
+                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                             allowfullscreen></iframe>`,
       task: "",
       count: 1,
+      texts:[],
       json: [
         {
           "task": "What dress is the speaker looking for?",
@@ -365,19 +371,25 @@ export default {
         this.count--;
     },
     postPost: function () {
-      if(this.selected==='Пока нечего не выбрано'){
+      if (this.selected === 'Пока нечего не выбрано') {
         alert("Выберите один из вариантов")
-        return 
+        return
       }
       this.count++;
-      this.options=[];
-      this.selected="Пока нечего не выбрано"
+      if (this.count == 2) {
+        this.media =` <iframe width="560" height="315" src="https://www.youtube.com/embed/0cSt9R_lvYI"
+                             title="YouTube video player" frameborder="0"
+                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                             allowfullscreen></iframe>`
+      }
+      this.options = [];
+      this.selected = "Пока нечего не выбрано"
       let json = this.json;
       // console.log(json)
       this.task = this.json[this.count - 1].task
-      for(let ans in json[this.count].answers ){
+      for (let ans in json[this.count].answers) {
         // this.options+=
-        this.options=[... this.options, {text:json[this.count].answers[ans], value:this.alphabet[ans]}]
+        this.options = [...this.options, {text: json[this.count].answers[ans], value: this.alphabet[ans]}]
       }
       //
       // {text: 'Radio 1', value: 'radio1'},
@@ -395,8 +407,8 @@ export default {
   },
   beforeMount() {
     this.task = this.json[0].task
-    for(let ans in this.json[1].answers ){
-      this.options=[...this.options, {text:this.json[this.count].answers[ans], value:this.alphabet[ans]}]
+    for (let ans in this.json[1].answers) {
+      this.options = [...this.options, {text: this.json[this.count].answers[ans], value: this.alphabet[ans]}]
     }
   }
 }
