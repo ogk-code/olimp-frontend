@@ -2,7 +2,9 @@
   <div id="app">
     <router-view/>
     <br>
-    <span>Якщо проблеми, писати на пошту: </span><span>sasi@</span>
+    <span>Якщо проблеми, писати на пошту: </span><span>yra@sutulaya.su</span><br>
+    <span>Telegram </span><span>@MisterYura или @aint_waynei</span>
+
   </div>
 </template>
 

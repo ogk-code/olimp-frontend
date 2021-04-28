@@ -1,7 +1,8 @@
 <template>
   <div>
     <form class="login" @submit.prevent="login">
-      <h3 align="center">Введіть ФІО та повну назву навчального закладу</h3>
+      <h3 align="center">Введіть ID та пароль, який було выслано вам на email. Якщо данні не вірні або або лист за
+        данними не прийшов зверніться до слежби підтримки</h3>
       <!--<label>Email</label>
       <input required v-model="email" type="email" placeholder="Name"/>
       <label>Password</label>
@@ -23,22 +24,22 @@
 
 <script>
 
-  export default {
-    name: 'Login',
-    methods: {
-      Start : function () {
+export default {
+  name: 'Login',
+  methods: {
+    Start: function () {
 
 
-      }
     }
-
   }
+
+}
 </script>
 
 <style scoped>
-  .login{
-    width:400px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  </style>
+.login {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+</style>

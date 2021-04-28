@@ -1,12 +1,17 @@
 <template>
-  <div>
+  <div style="margin: 5% 15%">
 
   </div>
 </template>
 
 <script>
 export default {
-name: "TaskPage"
+  name: "TaskPage",
+  data() {
+    return {
+
+    }
+  }
 }
 </script>
 
