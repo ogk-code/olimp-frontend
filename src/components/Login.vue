@@ -1,6 +1,7 @@
 <template>
   <div>
     <form class="login" @submit.prevent="login">
+    <h1 align="center" color="red">Олімпіада розпочнеться 30.04 у 11:00</h1>
       <h3 align="center">Введіть ID та пароль, який було выслано вам на email. Якщо данні не вірні або або лист за
         данними не прийшов зверніться до слежби підтримки</h3>
       <!--<label>Email</label>
@@ -11,13 +12,13 @@
 
       <div class="form-group">
         <label for="exampleInputEmail1">ID</label>
-        <input type="text" v-model="id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Id">
+        <input disabled type="text" v-model="id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Id">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" v-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <input disabled type="password" v-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
-      <button @click="auth" type="submit" class="btn btn-dark">Почати олімпіаду</button>
+      <button disabled @click="auth" type="submit" class="btn btn-dark">Почати олімпіаду</button>
     </form>
   </div>
 </template>
