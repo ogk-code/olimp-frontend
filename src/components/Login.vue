@@ -1,8 +1,7 @@
 <template>
   <div>
     <form class="login" @submit.prevent="login">
-      <h3 align="center">Введіть ID та пароль, який було выслано вам на email. Якщо данні не вірні або або лист за
-        данними не прийшов зверніться до слежби підтримки</h3>
+      <h3 align="center">Введіть ID і пароль, які були відправлені вам на email. Якщо дані не вірні - повідомте в службу підтримки.</h3>
       <!--<label>Email</label>
       <input required v-model="email" type="email" placeholder="Name"/>
       <label>Password</label>
