@@ -1,11 +1,29 @@
 <template>
   <div>
     <h3 align="center">Завдання <span>{{ count }}</span></h3>
-    <div v-html="media"></div>
-    <span>{{ task }}</span>
-
-    <br><br>
-
+    <div style=" " v-bind:style="{display:activeDisplayYoutube}" v-html="media"></div>
+    <div class="tasks" style="padding-right: 40%">
+      <br>
+      <div v-bind:style="{display:textVisible}">{{task_text}}</div>
+      <span><h2>{{ task }}</h2></span>
+      <div v-bind:style="{display:actionDisplayMediaText}">
+        <b-img :src="media_text" fluid alt="Responsive image"></b-img>
+      </div>
+      <br>
+      <b-container v-bind:style="{display:activeDisplay}" fluid class="p-4 bg-dark">
+        <b-row>
+          <b-col>
+            <b-img thumbnail fluid :src="A" alt="Image 1"></b-img>
+          </b-col>
+          <b-col>
+            <b-img thumbnail fluid :src="B" alt="Image 2"></b-img>
+          </b-col>
+          <b-col>
+            <b-img thumbnail fluid :src="C" alt="Image 3"></b-img>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
     <b>Виберіть одне:</b>
     <b-form-group v-slot="{ ariaDescribedby }">
       <b-form-radio-group
@@ -21,9 +39,9 @@
 
     <div style="margin-top: 20px" class="container">
       <div class="row">
-        <div class="col">
-          <button type="button" @click="postNepost" class="btn btn-dark">Назад</button>
-        </div>
+        <!--        <div class="col">-->
+        <!--          <button type="button" @click="postNepost" class="btn btn-dark">Назад</button>-->
+        <!--        </div>-->
 
         <div class="col">
           <button @click="postPost" type="button" class="btn btn-dark float-right">Вперед</button>
@@ -45,31 +63,143 @@
 
 <script>
 // import axios from 'axios';
-
+import A1 from '../assets/ex/1A.jpg'
+import A2 from '../assets/ex/2A.jpg'
+import A3 from '../assets/ex/3A.jpg'
+import B1 from '../assets/ex/1B.jpg'
+import B2 from '../assets/ex/2B.jpg'
+import B3 from '../assets/ex/3B.jpg'
+import C1 from '../assets/ex/1C.jpg'
+import C2 from '../assets/ex/2С.jpg'
+import C3 from '../assets/ex/3C.jpg'
+import TEXT17 from '../assets/ex/17.jpg'
+import TEXT18 from '../assets/ex/18.jpg'
+import TEXT19 from '../assets/ex/19.jpg'
+import TEXT20 from '../assets/ex/20.jpg'
+import TEXT21 from '../assets/ex/21.jpg'
+import router from "../router"
 
 export default {
   name: "Task",
   data() {
     return {
-      media: ` <iframe width="560" height="315" src="https://www.youtube.com/embed/0cSt9R_lvYI"
+      A1, B1, C1,
+      A2, B2, C2,
+      A3, B3, C3,
+      ex_27_33:"CONTEMPORARY ART\n" +
+          "Read the text below. Mark true (T) or false (F) sentences. Write your answers on the answer sheet. \n" +
+          "\tContemporary art is defined as the work of artists who are living in the twenty-first century. It mirrors contemporary" +
+          " culture and society, offering teachers, students, and general audiences a rich resource through which to consider current " +
+          "ideas and rethink the familiar. The work of contemporary artists is a dynamic combination of materials, methods, concepts, " +
+          "and subjects that challenges traditional boundaries and defies easy definition. Diverse and eclectic, " +
+          "contemporary art is distinguished by the very lack of a uniform organizing principle, " +
+          "ideology, or -ism. In a globally influenced, culturally diverse, and technologically advancing world, " +
+          "contemporary artists give voice to the varied and changing cultural landscape of identity, values, and beliefs. \n" +
+          "\tArt can exist outside of traditional exhibition forums - including public spaces, site-specific locations," +
+          " non-art sites - and is often presented in innovative ways - as an installation, an event, a performance, " +
+          "online, or as documentation of an impermanent work. \n",
+      task_text: "CAREER IDEAS FOR DIFFERENT PERSONALITY TYPES \n" +
+          "\tTo find career ideas that will suit your personality, the first step is to complete a personality-based career test. This will enable you to see which careers are most popular for your personality type. \n" +
+          "22) ___\n" +
+          "\tChoosing a new career is one of the most meaningful resolution you will ever make. It can affect your happiness and prosperity for many years to come.\n" +
+          "23) ___\n" +
+          "\tThe degree to which your personality matches your career is a big factor in whether you will enjoy it. A poor match can lead to demotivation and poor performance. A good match means you are more likely to be successful and will enjoy going to work. \n" +
+          "24) ___\n" +
+          "\tIf a career looks attractive, it does not necessarily mean you will enjoy it. The experience of a career from within is often different to how it appears to those outside the career. This means you need to speak to people who are already in the career to find out what it is like. This can be a very time-consuming task and, for most people, this amount of research is not practical.\n" +
+          "25) ___\n" +
+          "\tWe have done the research for you. We gathered the views of 17,000 people in work, to detect what each career is like. We also built personality profiles for each career, so they could be compared with your personality. Based on the research, it gives you lots of career analysis, such as an estimate of how much you will enjoy each career and what you might like or dislike about it.\n" +
+          "26) ___\n" +
+          "\tAnother way to find career ideas is to look at those careers each personality type chooses most frequently. However, this does not necessarily lead to the most enjoyable career. You can see frequently-chosen careers for each type by clicking on your type in the table, right. If you don't know your personality type, complete our free personality test first.\n ",
+      ex_33_42:"The Eurovision Song Contest is a (33)… competition which is held annually among the member countries of the" +
+          " European Broadcasting Union. Each country is represented (34)… only one candidate who is chosen beforehand. The" +
+          " songs performed shouldn't last longer than three minutes. The festival takes place on (35)… television. After " +
+          "all the candidates (36)... their songs, the judges and the audience vote for the other countries' songs to" +
+          " determine the most popular song in the competition. The contest has been broadcast (37)… its inauguration " +
+          "in 1956 and it has proved to be one of the most watched non-sporting events in the world. Since 2000 " +
+          "Eurovision has also been broadcast (38)… its Internet website. The winners of the contest usually have " +
+          "short-term success. Among (39)… notables there are ABBA (winner of 1974), and Celine Dion (winner of 1988)." +
+          " The record for the highest number of wins belongs to Ireland (40)... has won the competition seven times." +
+          " The first contest was held in Lugano, Switzerland and was won by the host country. The second one was hosted i" +
+          "n Germany. After that it was decided that (41)… the winning country would host the contest the next year." +
+          " In the 1960s and 1970s some countries declined for particular reasons, so other countries agreed to host" +
+          " instead. As Eurovision is a live show it gives every participant an opportunity to rehearse on the stage " +
+          "of the Eurovision auditorium during several days before (42)… Saturday show. " +
+          "The countries participants should observe numerous detailed rules, and their new version is produced each year.",
+      actionDisplayMediaText: 'none',
+      textVisible:"none",
+      media_text: TEXT17,
+      TEXT17,
+      TEXT18,
+      TEXT19,
+      TEXT20,
+      TEXT21,
+      A: A1, B: B1, C: C1,
+
+      media: ` <iframe width="560" height="315" src="https://www.youtube.com/embed/0cSt9R_lvYI?controls=0"
                              title="YouTube video player" frameborder="0"
                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                              allowfullscreen></iframe>`,
       task: "",
+      media_answers: `<b-container v-bind:style="activeDisplay" fluid class="p-4 bg-dark">
+  <b-row>
+    <b-col>
+      <b-img thumbnail fluid :src="A" alt="Image 1"></b-img>
+    </b-col>
+    <b-col>
+      <b-img thumbnail fluid :src="B" alt="Image 2"></b-img>
+    </b-col>
+    <b-col>
+      <b-img thumbnail fluid :src="C" alt="Image 3"></b-img>
+    </b-col>
+  </b-row>
+</b-container>`,
+      ex_43_48:"Read the text and answer the questions 43-48. Choose A, B, C or D. \n" +
+          "Mini is a British automotive brand which is actually owned by BMW corporation " +
+          "that specialises in small cars. The original Mini was a line of iconic British " +
+          "small cars which were produced by the British Motor Corporation in the years of 1959-2000." +
+          " In 1969 Mini became a brand in its own right. Performance versions of its models " +
+          "used the name Cooper. The name originated thanks to the partnership with John Cooper, " +
+          "a racing legend. In 2000 Rover Group, including Mini, was acquired by BMW with BMW retaining" +
+          " the Mini brand. Until 2000 two-door cars were manufactured. In 1995 the successor's development" +
+          " began and since 2001 a new-generation car has been produced. The current Mini range includes " +
+          "three-door and five-door models, both hatchbacks and crossovers. Mini vehicles have taken part " +
+          "in rallies and Mini Cooper S won the Monte Carlo Rally on three occasions in the 1960s. The original" +
+          " two-door Mini was the winner of numerous prestigious awards in the 1990s which have been followed by " +
+          "other vehicles of the brand in the 21st century. The classic Mini has been criticised a lot for " +
+          "its security. In response to all these accusations the car creator said: I do not design cars to " +
+          "see them crushed. Many celebrities owned a Mini. Even Enzo Ferrari, the founder of the Ferrari " +
+          "automobile brand and a motor racing team of the same name, had three classic Minis in his garage." +
+          " The cars' unique front-wheel drive layout ? with the engine sideways ? allowed for 80% of the " +
+          "internal space of the car to be used for passengers, which explains how four people could fit " +
+          "relatively comfortably in a small space. There are some 469 Mini clubs in the UK and at least " +
+          "another 260 worldwide. The car is continually voted one of the most favourite cars of all time" +
+          " and it was recently voted Britain's favourite car ever produced.\n" +
+          "\n",
       count: 1,
-      texts:[],
+      ex_49_54:"\n" +
+          "RHYTHM AND BLUES\n" +
+          "Rhythm and blues (or R&B), a popular music genre 49)__ jazz, gospel, and blues influences, is" +
+          " a musical term 50)__ the rich and varied folk music of the African Americans 51)__ other Americans." +
+          " First performed by African American artists, rhythm and blues became the biographical mirrors of " +
+          "work songs, ballads or lyrics from minstrel shows, church hymns and gospel music, and some of the " +
+          "secular music of America in 52)__ . The combination of rhythm and blues 53)__ forth the manifestation" +
+          " of particular emotions by the singer or lead instrument in reflections of the very melodic and" +
+          " soulful \"blues\" 54)__ an accompaniment of \"rhythmic\" concentration and force.\n",
+      activeDisplay: 'block',
+      activeDisplayYoutube: 'block',
+      texts: [],
       json: [
         {
           "task": "What dress is the speaker looking for?",
-          "answers": ["photo", "photo", "photo"]
+          "answers": ["1", "2", "3"]
         },
         {
           "task": "When would the man like to be woken up?",
-          "answers": ["photo", "photo", "photo"]
+          "answers": ["1", "2", "3"]
         },
         {
           "task": "What kind of food CAN’T be served to the traveller?",
-          "answers": ["photo", "photo", "photo"]
+          "answers": ["1", "2", "3"]
         },
         {
           "task": "What does the speaker enjoy about his new place?",
@@ -328,7 +458,7 @@ export default {
           "answers": ["am", "do", "very", "yes"]
         },
         {
-          "task": "The chemist's was open, so luckily I … buy some aspirin.",
+          "task": "(Modal verbs) The chemist's was open, so luckily I … buy some aspirin.",
           "answers": ["can", "can't", "did can", "was able to"]
         },
         {
@@ -340,7 +470,7 @@ export default {
           "answers": ["I must have", "I've been to", "I've had to", "I've must"]
         },
         {
-          "task": "We can't go along here because the road is … .",
+          "task": "(The passive) We can't go along here because the road is … .",
           "answers": ["been repaired", "being repaired", "repair", "repaired"]
         },
         {
@@ -348,7 +478,7 @@ export default {
           "answers": ["are said", "are said to", "say", "say to"]
         },
         {
-          "task": "The driver was arrested for failing … an accident.",
+          "task": "(The infinitive and the –ing) The driver was arrested for failing … an accident.",
           "answers": ["of report", "report", "reporting", "to report"]
         },
         {
@@ -358,7 +488,8 @@ export default {
       ],
       selected: 'Пока нечего не выбрано',
       options: [],
-      alphabet: ["a", "b", "c", "d", "e", "f", "g"],
+      alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i"],
+
       /*errors: [] */
     }
   },
@@ -366,10 +497,7 @@ export default {
 
   methods: {
 
-    postNepost() {
-      if (this.count > "1")
-        this.count--;
-    },
+
     postPost: function () {
       if (this.selected === 'Пока нечего не выбрано') {
         alert("Выберите один из вариантов")
@@ -377,19 +505,89 @@ export default {
       }
       this.count++;
       if (this.count == 2) {
-        this.media =` <iframe width="560" height="315" src="https://www.youtube.com/embed/0cSt9R_lvYI"
-                             title="YouTube video player" frameborder="0"
-                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                             allowfullscreen></iframe>`
+        this.media = ` <iframe width="560" height="315" src="https://www.youtube.com/embed/aAR3-W1yXtI?controls=0"
+ title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+ gyroscope; picture-in-picture" allowfullscreen></iframe>`
+        this.A = this.A2
+        this.B = this.B2
+        this.C = this.C2
+      } else if (this.count == 3) {
+        this.media = `
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pK12zKZEWpU?controls=0"
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        this.A = this.A3
+        this.B = this.B3
+        this.C = this.C3
+      } else if (this.count == 4) {
+        this.media = `
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ubtgaoFDgrw?controls=0"
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+        this.activeDisplay = 'none';
+      } else if (this.count == 5) {
+        this.media = `
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BY5rykNDjxk?controls=0"
+ title="YouTube video player" frameborder="0" allow="accelerometer;
+autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+      } else if (this.count == 6) {
+        this.media = `
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I9yJrBFLNLw?controls=0"
+ title="YouTube video player" frameborder="0" allow="accelerometer;
+ autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+      } else if (this.count >= 7 && this.count <= 12) {
+        this.media = `
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7TvmGnXwaYI?controls=0"
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+ clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+      } else if (this.count >= 13 && this.count <= 16) {
+        this.media = `
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1jvjzS3x9X4?controls=0"
+ title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
+clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+`
+      } else if (this.count == 17) {
+        this.activeDisplayYoutube = 'none'
+        this.actionDisplayMediaText = 'block'
+      } else if (this.count == 18) {
+        this.media_text = this.TEXT18
+      } else if (this.count == 19) {
+        this.media_text = this.TEXT19
+      } else if (this.count == 20) {
+        this.media_text = this.TEXT20
+      } else if (this.count == 21) {
+        this.media_text = this.TEXT21
+      }else if (this.count == 22) {
+        this.actionDisplayMediaText = 'none'
+        this.textVisible = "block"
+      }else if (this.count == 27 ) {
+        this.task_text = this.ex_27_33
+      }else if (this.count == 33 ) {
+        this.task_text = this.ex_33_42
+      }else if (this.count == 43 ) {
+        this.task_text = this.ex_43_48
+      }else if (this.count == 49 ) {
+        this.task_text = this.ex_49_54
+      }else if (this.count == 55 ) {
+        this.textVisible = "none"
+      }else if (this.count == 75 ) {
+
+        router.push("/result")
       }
+
       this.options = [];
       this.selected = "Пока нечего не выбрано"
       let json = this.json;
       // console.log(json)
       this.task = this.json[this.count - 1].task
-      for (let ans in json[this.count].answers) {
+      for (let ans in json[this.count - 1].answers) {
         // this.options+=
-        this.options = [...this.options, {text: json[this.count].answers[ans], value: this.alphabet[ans]}]
+        this.options = [...this.options, {text: json[this.count - 1].answers[ans], value: this.alphabet[ans]}]
       }
       //
       // {text: 'Radio 1', value: 'radio1'},
@@ -407,8 +605,8 @@ export default {
   },
   beforeMount() {
     this.task = this.json[0].task
-    for (let ans in this.json[1].answers) {
-      this.options = [...this.options, {text: this.json[this.count].answers[ans], value: this.alphabet[ans]}]
+    for (let ans in this.json[0].answers) {
+      this.options = [...this.options, {text: this.json[0].answers[ans], value: this.alphabet[ans]}]
     }
   }
 }
