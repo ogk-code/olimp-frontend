@@ -14,8 +14,8 @@ Vue.use(VueAxios, axios)
 // Vue.use(VueRouter)
 
 function isAuthenticated() {
-  // return sessionStorage.getItem("access_token") !== null;
-  return true;
+  return sessionStorage.getItem("access_token") !== null;
+  // return true;
 }
 
 Vue.config.productionTip = false

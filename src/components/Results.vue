@@ -12,13 +12,35 @@
         data() {
             return {
                 items: [
-                    { Номер: 1, ФІО: 'Dickerson', "Навчальний заклад": 'Macdonald', "Набрані бали": 11 },
-                    { Номер: 2, ФІО: 'Larsen', "Навчальний заклад": 'Shaw', "Набрані бали": 11 },
-                    { Номер: 3, ФІО: 'Geneva', "Навчальний заклад": 'Wilson', "Набрані бали": 11 },
-                    { Номер: 4, ФІО: 'Jami', "Навчальний заклад": 'Carney', "Набрані бали": 11 }
+
                 ]
             }
+        },
+      methods:{
+
+          serializeRes(json){
+            let rows = [];
+            for(let index in json){
+              rows[index]={"#":(parseInt(index)+1), "ПІБ":json[index].profile, "Набраний бал":json[index].ebal}
+            }
+            return rows
+          },
+       async getResults(){
+         let object = this;
+         const axios = require('axios').default;
+         await axios({
+           method: "get",
+           url: "https://olimp-english.herokuapp.com/api/v1/res",
+         }).then(function (response, obj = object) {
+           console.log(response)
+           obj.items = obj.serializeRes(response.data)
+         })
         }
+
+      },
+    beforeMount() {
+      this.getResults()
+    }
     }
 </script>
 

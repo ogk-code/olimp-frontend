@@ -503,6 +503,7 @@ export default {
         alert("Выберите один из вариантов")
         return
       }
+      this.postAnswer(this.count, this.selected)
       this.count++;
       if (this.count == 2) {
         this.media = ` <iframe width="560" height="315" src="https://www.youtube.com/embed/aAR3-W1yXtI?controls=0"
@@ -589,6 +590,8 @@ clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
         // this.options+=
         this.options = [...this.options, {text: json[this.count - 1].answers[ans], value: this.alphabet[ans]}]
       }
+
+
       //
       // {text: 'Radio 1', value: 'radio1'},
       // {text: 'Radio 3', value: 'radio2'},
@@ -601,7 +604,42 @@ clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
       //     .catch((error) => {
       //         console.log(error);
       //     });
+    },
+    async postAnswer(count, answer){
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer " + sessionStorage.getItem("access_token"),
+      }
+
+      console.log(headers)
+      const axios = require('axios').default;
+  console.log({
+    "ex":count,
+    "answer":answer
+  },)
+
+      await axios({
+        method: "post",
+        url: "https://olimp-english.herokuapp.com/api/v1/answer/",
+        data: {
+          "ex":count+"",
+          "answer":answer
+        },
+        headers: headers,
+      }).then(function (response) {
+        console.log(response)
+        // res = response.data
+      }).catch(function (error) {
+        if (error.response) {
+          console.log(error.response)
+        } else if (error.request) {
+          console.log(error.request)
+        } else if (error.message) {
+          console.log(error.message)
+        }
+      });
     }
+
   },
   beforeMount() {
     this.task = this.json[0].task

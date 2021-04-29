@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from "vue-router";
 import Index from "@/components/Index";
 import Task from "@/components/Task";
+import Result from "@/components/Results";
 // import Auth from "@/components/Auth";
 // import HomeV2 from "@/components/HomeV2";
 // import Registration from "@/components/Registration";
@@ -22,6 +23,8 @@ export default new Router({
             path: '/', component: Index, name: "Auth",
         }, {
             path: '/task', component: Task, name: "Task",
+        },{
+            path: '/result', component: Result, name: "Result",
         },
         //
     ],
